@@ -19,3 +19,21 @@ def lambda_handler(event, context):
 	print "File " + s3object + ", on bucket " + s3bucket + " will be moved to " + s3objectkeypath
 	s3.Object(s3bucket,s3objectkeypath).copy_from(CopySource=s3bucket + '/' + s3object)
 	#s3.Object(s3bucket, s3object).delete()
+
+
+if __name == "__main__":
+	event = {
+            "Records": [{
+                "s3": {
+                    "object": {
+                        "key": "s3key"
+                    },
+                    "bucket": {
+                        "name": "s3bucket"
+                    }
+                }
+            }]
+        }
+    context = []
+
+    lambda_handler(event, context)
